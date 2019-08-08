@@ -20,14 +20,12 @@ class Search extends React.Component {
     })
 
     this.props.filter(temp);
-    console.log(temp)
   }
 
   render() {
     return (
       <div className='reviewSearch'>
-        <input type='text' className='reviewFilter' placeholder='Search' onChange={(e) => this.handleSearchInputChange(e.target.value)}></input>
-        <img type='submit' className='reviewFilterSumbit' src='./imgs/arrow.svg' ></img>
+        <input type='text' className='reviewFilter searchBox' placeholder='Search' onChange={(e) => this.handleSearchInputChange(e.target.value)}></input>
       </div>
     )
   }

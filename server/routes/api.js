@@ -10,6 +10,14 @@ var connection = mysql.createConnection({
     database : 'bnb'
   });
 
+const defaultCorsHeaders = {
+  'access-control-allow-origin': '*',
+  'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS',
+  'access-control-allow-headers': 'content-type, accept',
+  'access-control-max-age': 10,
+  'content-type': 'application/json'
+};
+
 // CHECK CONNECTION
 connection.connect((err)=> {
   if (err) {
@@ -19,9 +27,9 @@ connection.connect((err)=> {
   }
 })
 
-
 // GET ALL REVIEWS
 router.get('/reviews', (req, res, next) => {
+  res.set(defaultCorsHeaders);
   console.log('router.get called')
   let sql = 'SELECT * FROM reviews;';
   connection.query(sql, (err, data)=> {

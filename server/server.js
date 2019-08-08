@@ -2,11 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const routes = require('./routes/api.js');
 const path = require('path');
+const cors = require('cors');
 
 // create express server
 const app = express();
 
 // initialize middleware
+app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(function(err, req, res, next) {
@@ -17,10 +19,11 @@ app.use(function(err, req, res, next) {
 app.use(routes);
 
 // listen
-app.listen(process.env.port || 3000, () => {
-  console.log('listening for requests on port 3000');
+app.listen(process.env.port || 3003, () => {
+  console.log('listening for requests on port 3003');
 });
 
+// THESE ARE MY NOTES ON MYSQL
 //LOAD DATA LOCAL INFILE 'MOCK_DATA.csv' INTO TABLE bnb.reviews;
 
 // LOAD DATA LOCAL INFILE 'MOCK_DATA.csv'

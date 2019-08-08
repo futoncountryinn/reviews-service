@@ -27,9 +27,10 @@ class AllReviewsLightBox extends React.Component {
     })
   }
 
+  // loads olders reviews as user scrolls to bottom of list
   scrollHandler(e) {
     let element = e.target
-    console.log(element.scrollHeight + ' - ' + element.scrollTop + ' === ' + (element.scrollHeight - element.scrollTop) + ' || NEEDS TO BE ' + element.clientHeight)
+    //console.log(element.scrollHeight + ' - ' + element.scrollTop + ' === ' + (element.scrollHeight - element.scrollTop) + ' || NEEDS TO BE ' + element.clientHeight)
     if (element.scrollHeight - element.scrollTop === element.clientHeight) {
       if (this.state.filterApplied) {
 
@@ -48,13 +49,14 @@ class AllReviewsLightBox extends React.Component {
     }
   }
 
+  // shows reviews based on searched string
   repopulateListForFilter(reviews) {
     this.setState({
       reviews: reviews,
       filterApplied: true
-
     })
 
+    // check if all reviews have been loaded
     if (reviews.length === this.state.reviews) {
       this.setState({
         filterApplied: false,
@@ -66,6 +68,7 @@ class AllReviewsLightBox extends React.Component {
   // this renders all the messages
   renderSevenMessages(reviews) {
 
+    // assigns loading gif to bottom of reviews if there are more reviews to load
     let loadingGif = (reviews) => {
       if (reviews.length < this.props.allReviews.length && !this.state.filterApplied) {
         return (<img className='loadingGif' src='./imgs/loading.gif'></img>)
@@ -77,7 +80,7 @@ class AllReviewsLightBox extends React.Component {
     return (
       <div className='transparentBackground' onClick={this.seeAllReviews} onScroll={this.scrollHandler}>
           <div id='allReviewsLightBox'>
-          <img src='../imgs/x.svg' className='allReviewsExitButton' onClick={this.seeAllReviews}></img>
+          <img src='../imgs/x.png' className='allReviewsExitButton' onClick={this.seeAllReviews}></img>
           <h1>{this.state.reviews.length} reviews</h1>
           <Search reviews={this.props.allReviews} filter={this.repopulateListForFilter} />
           {
@@ -101,11 +104,10 @@ class AllReviewsLightBox extends React.Component {
   }
 
   render() {
+    // renders either a lightbox to see all reviews or a button to open the lightbox
     if (this.state.isToggled) {
       const reviews = this.state.reviews.slice(0, (this.state.numReviewsShowing++) * 7)
-      return (
-        this.renderSevenMessages(reviews)
-      )
+      return (this.renderSevenMessages(reviews))
     } else {
       return <p className='seeAllReviews' onClick={this.seeAllReviews}> See All Reviews</p>
     }

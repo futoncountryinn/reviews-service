@@ -16,7 +16,7 @@ class Reviews extends React.Component {
 
   getReviews(cb) {
     $.ajax({
-      url: '/reviews',
+      url: 'http://localhost:3003/reviews',
       type: 'GET',
       dataType: 'json',
       success: (data) => {
@@ -46,7 +46,7 @@ class Reviews extends React.Component {
     let sixReviews = this.state.allReviews.slice(0,6);
     return (
       <div>
-        <hr></hr>
+        <hr className='hrMargin'></hr>
         <h1>Reviews</h1>
         <div className='allReviews'>
           {

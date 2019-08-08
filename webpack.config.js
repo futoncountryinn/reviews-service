@@ -1,6 +1,8 @@
 var path = require('path');
 var SRC_DIR = path.join(__dirname, '/client');
 var DIST_DIR = path.join(__dirname, '/public');
+
+// console.log(SRC_DIR);
 // DONT USE BABEL-LOADER 8, ONLY 7 || npm install -D babel-loader@7 babel-core babel-preset-env webpack
 
 module.exports = {
@@ -22,9 +24,25 @@ module.exports = {
         }
       },
       {
+        test: /\.svg$/,
+        loader: 'svg-inline-loader'
+      },
+      {
         test: /\.css$/,
         loader: 'style-loader!css-loader'
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {},
+          },
+        ],
       }
     ]
+  },
+  resolve: {
+    extensions: ['*', '.js', '.jsx']
   }
 }

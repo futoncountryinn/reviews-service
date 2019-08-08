@@ -3,10 +3,16 @@ body {
   padding: 0px 80px 0px 80px;
 }
 
+.hrMargin {
+  margin-bottom: 100px;
+  margin-top: 100px;
+}
+
 h1 {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 700;
   -webkit-font-smoothing: antialiased;
+  -ms-font-smoothing: antialiased;
 }
 
 .review > .header{
@@ -25,7 +31,6 @@ h1 {
 }
 
 .review > .header > img {
-  /* display: table-cell; */
   height: 48px;
   width: 48px;
   background-color: #D8D8D8 !important;
@@ -37,7 +42,7 @@ h1 {
 
 .userName {
   display: table-cell;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.375em !important;
   font-size: 16px;
 }
@@ -48,7 +53,7 @@ h1 {
 
 .reviewHeaderContent {
   display: table-cell !important;
-  line-height: 0 !important;
+  line-height: 1.43 !important;
   padding: 0px 0px 24px 0px;
   vertical-align: middle !important;
 }
@@ -95,11 +100,13 @@ hr {
   line-height: 1.43;
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
+  -ms-font-smoothing: antialiased;
 }
 
 .review {
   -webkit-font-smoothing: antialiased;
-  font-family: 'Nunito', sans-serif;
+  -ms-font-smoothing: antialiased;
+  font-family: 'Roboto', sans-serif;
 }
 
 .review > .fullWidth {
@@ -117,6 +124,14 @@ hr {
   margin: auto !important;
   z-index: 999;
   display: block;
+}
+
+.seeAllReviews {
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -ms-font-smoothing: antialiased;
+  color: var(--color-brand-plus, #914669) !important;
+  font-weight: 500;
 }
 
 .transparentBackground {
@@ -144,19 +159,25 @@ hr {
   position: relative;
   top: -75px;
   float: right;
+  width: 175px;
 }
+
+.searchBox {
+  background: url(../imgs/x.png) no-repeat;
+  background-position: 95% 50%;
+  background-size: 17px;
+}
+
 
 .reviewSearch > .reviewFilter {
   text-align: left !important;
   line-height: normal !important;
   width: 100% !important;
-  background: rgb(255, 255, 255) !important;
   border-radius: 2px !important;
   padding: 8px !important;
   border-width: 1px !important;
   border-style: solid !important;
   border-color: rgb(235, 235, 235) !important;
-  border-image: initial !important;
   width: 175px;
 }
 
