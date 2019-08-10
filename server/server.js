@@ -10,9 +10,10 @@ const app = express();
 // initialize middleware
 app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
-app.use(function(err, req, res, next) {
-  res.status(422).send({error: err.message})
+app.use(function (err, req, res, next) {
+  res.status(422).send({ error: err.message })
 });
 
 //initialize routes mw

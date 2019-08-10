@@ -10,8 +10,8 @@ class Reviews extends React.Component {
     super(props);
     this.state = {
       allReviews: [],
-      isToggled: false
-    }
+      isToggled: false,
+    };
   }
 
   getReviews(cb) {
@@ -19,56 +19,58 @@ class Reviews extends React.Component {
       url: 'http://localhost:3003/reviews',
       type: 'GET',
       dataType: 'json',
-      success: (data) => {
-        cb(data)
+      success: data => {
+        cb(data);
       },
-      error: (err) => {
+      error: err => {
         throw new Error(err);
-      }
-    })
+      },
+    });
   }
 
   componentDidMount() {
-    this.getReviews( (reviews) => {
+    this.getReviews(reviews => {
       this.setState({
-        allReviews: reviews.sort(function(a,b) {
+        allReviews: reviews.sort(function(a, b) {
           if (a.numDaysAgo > b.numDaysAgo) {
-            return 1
+            return 1;
           } else {
-            return -1
+            return -1;
           }
-        })
-      })
-    })
+        }),
+      });
+    });
   }
 
   render() {
-    let sixReviews = this.state.allReviews.slice(0,6);
+    let sixReviews = this.state.allReviews.slice(0, 6);
     return (
       <div>
-        <hr className='hrMargin'></hr>
+        <hr className="hrMargin" />
         <h1>Reviews</h1>
-        <div className='allReviews'>
-          {
-            sixReviews.map((review) => (
-              <Review key={review.id}
-                      id={review.id}
-                      name={review.name}
-                      avatar={review.avatar}
-                      reviewAge={review.numDaysAgo}
-                      content={review.content}
-                      allReviews={this.state.allReviews}
-                      seeAllReviewsMode={false}
-              />))
-          }
+        <div className="allReviews">
+          {sixReviews.map(review => (
+            <Review
+              key={review.id}
+              id={review.id}
+              name={review.name}
+              avatar={review.avatar}
+              reviewAge={review.numDaysAgo}
+              content={review.content}
+              allReviews={this.state.allReviews}
+              seeAllReviewsMode={false}
+            />
+          ))}
         </div>
         <div>
-          <AllReviewsLightBox allReviews={this.state.allReviews} showingAll={this.state.showingAll} />
+          <AllReviewsLightBox
+            allReviews={this.state.allReviews}
+            showingAll={this.state.showingAll}
+          />
         </div>
       </div>
-    )
+    );
   }
-
 }
 
 module.exports = Reviews;
