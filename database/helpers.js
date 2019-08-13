@@ -19,7 +19,7 @@ connection.connect((err) => {
 db.getReviews = (callback) => {
   connection.query('SELECT * FROM reviews', (err, response) => {
     if (err) callback(err);
-    callback(response);
+    callback(err, response);
   })
 }
 
@@ -29,16 +29,14 @@ db.createReview = (data, callback) => {
   const daysAgo = faker.random.number();
 
   connection.query('INSERT INTO airbnb.reviews (name, avatar, numDaysAgo, content) VALUES (?,?,?,?)', [data.name, avatar, daysAgo, data.content], (err, response) => {
-    if (err) callback(err);
-    callback(response);
+    callback(err, response);
   })
 }
 
 // UPDATE A REVIEW
 db.updateReview = (data, callback) => {
   connection.query(`UPDATE airbnb.reviews SET content = ? WHERE id = ?`, [data.content, data.id]), (err, response) => {
-    if (err) callback(err);
-    callback(response);
+    callback(err, response);
   }
 }
 
@@ -46,7 +44,7 @@ db.updateReview = (data, callback) => {
 db.deleteReview = (data, callback) => {
   connection.query('DELETE FROM airbnb.reviews WHERE id = ?', [data.id], (err, response) => {
     if (err) callback(err);
-    callback(response);
+    callback(err, response);
   })
 };
 

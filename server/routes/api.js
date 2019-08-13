@@ -16,7 +16,8 @@ const defaultCorsHeaders = {
 router.get('/reviews', (req, res, next) => {
   res.set(defaultCorsHeaders);
   console.log('router.get called');
-  db.getReviews((response) => {
+  db.getReviews((err, response) => {
+    if (err) throw new Error(err);
     res.send(response);
   });
 });
@@ -24,7 +25,8 @@ router.get('/reviews', (req, res, next) => {
 // CREATE A REVIEW
 router.post('/reviews/add', (req, res, next) => {
   res.set(defaultCorsHeaders);
-  db.createReview(req.body, (response) => {
+  db.createReview(req.body, (err, response) => {
+    if (err) throw new Error(err);
     res.send(response);
   });
 });
@@ -33,7 +35,8 @@ router.post('/reviews/add', (req, res, next) => {
 router.put('/reviews/update', (req, res) => {
   res.set(defaultCorsHeaders);
   console.log('router.update called', req.body);
-  db.updateReview(req.body, (response) => {
+  db.updateReview(req.body, (err, response) => {
+    if (err) throw new Error(err);
     res.send(response);
   });
 });
@@ -42,7 +45,8 @@ router.put('/reviews/update', (req, res) => {
 router.delete('/reviews/delete', (req, res) => {
   res.set(defaultCorsHeaders);
   console.log('router.delete called');
-  db.deleteReview(req.body, (response) => {
+  db.deleteReview(req.body, (err, response) => {
+    if (err) throw new Error(err);
     res.send(response);
   })
 })
