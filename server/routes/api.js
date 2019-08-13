@@ -1,14 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const mysql = require('mysql');  // mysql -u root -p < database/schema.sql
+const db = require('../../database/helpers');
 
-// CONNECT TO MYSQL WITH CREDENTIALS
-var connection = mysql.createConnection({
-    host : 'localhost',
-    user : 'root',
-    password: 'sonny',
-    database : 'bnb'
-  });
 
 const defaultCorsHeaders = {
   'access-control-allow-origin': '*',
@@ -18,26 +11,43 @@ const defaultCorsHeaders = {
   'content-type': 'application/json'
 };
 
-// CHECK CONNECTION
-connection.connect((err)=> {
-  if (err) {
-    throw new Error(err);
-  } else {
-    console.log('mysqlConnecttion successful')
-  }
-})
 
 // GET ALL REVIEWS
 router.get('/reviews', (req, res, next) => {
   res.set(defaultCorsHeaders);
-  console.log('router.get called')
-  let sql = 'SELECT * FROM reviews;';
-  connection.query(sql, (err, data)=> {
-    if (err) {
-      throw new Error(err);
-    } else {
-      res.send(data);
-    }
+  console.log('router.get called');
+  db.getReviews((err, response) => {
+    if (err) throw new Error(err);
+    res.send(response);
+  });
+});
+
+// CREATE A REVIEW
+router.post('/reviews/add', (req, res, next) => {
+  res.set(defaultCorsHeaders);
+  db.createReview(req.body, (err, response) => {
+    if (err) throw new Error(err);
+    res.send(response);
+  });
+});
+
+// UPDATE A REVIEW
+router.put('/reviews/update', (req, res) => {
+  res.set(defaultCorsHeaders);
+  console.log('router.update called', req.body);
+  db.updateReview(req.body, (err, response) => {
+    if (err) throw new Error(err);
+    res.send(response);
+  });
+});
+
+// DELETE A REVIEW
+router.delete('/reviews/delete', (req, res) => {
+  res.set(defaultCorsHeaders);
+  console.log('router.delete called');
+  db.deleteReview(req.body, (err, response) => {
+    if (err) throw new Error(err);
+    res.send(response);
   })
 })
 

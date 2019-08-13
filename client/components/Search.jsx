@@ -6,35 +6,37 @@ class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      results: []
+      results: [],
     };
     this.handleSearchInputChange = this.handleSearchInputChange.bind(this);
-  };
+  }
 
   handleSearchInputChange(value) {
     const temp = [];
-    this.props.reviews.forEach( review => {
-      if(review.name.includes(value) || review.content.includes(value) ) {
-        temp.push(review)
+    this.props.reviews.forEach(review => {
+      if (review.name.includes(value) || review.content.includes(value)) {
+        temp.push(review);
       }
-    })
+    });
 
     this.props.filter(temp);
   }
 
   render() {
     return (
-      <div className='reviewSearch'>
-        <input type='text' className='reviewFilter searchBox' placeholder='Search' onChange={(e) => this.handleSearchInputChange(e.target.value)}></input>
+      <div className="reviewSearch">
+        <input
+          type="text"
+          className="reviewFilter searchBox"
+          placeholder="Search"
+          onChange={e => this.handleSearchInputChange(e.target.value)}
+        />
       </div>
-    )
+    );
   }
 }
 
 module.exports = Search;
-
-
-
 
 ////////////////
 
