@@ -26,6 +26,9 @@
 // SET GLOBAL event_scheduler = ON;
 // alter event updateReviewAge on schedule every 2 minute;`;
 
+
+// Method for seeding database simultaneously with data creation
+
 const fs = require('fs');
 const mysql = require('mysql');
 const csv = require('fast-csv');
