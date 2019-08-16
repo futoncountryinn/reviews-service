@@ -1,3 +1,30 @@
+const fs = require('fs');
+const mysql = require('mysql');
+
+// const data = fs.readFileSync('data.json');
+let data = JSON.parse(fs.readFileSync('data.json') + '');
+const connection = mysql.createConnection({
+	host: 'localhost',
+	user: 'root',
+	password: 'root',
+	database: 'airbnb_test'
+});
+
+// open the connection
+connection.connect((error) => {
+	data.forEach(review => {
+		if (error) {
+			console.error(error);
+		} else {
+			let query = 'INSERT INTO airbnb_test.reviews (name,avatar,date,content) VALUES (?,?,?,?)';
+			connection.query(query, [review.name, review.avatar, review.date, review.content], (error, response) => {
+				console.log(error || response);
+			});
+		}
+	})
+});
+
+
 // THESE ARE MY NOTES ON MYSQL
 //LOAD DATA LOCAL INFILE 'MOCK_DATA.csv' INTO TABLE bnb.reviews;
 
@@ -29,41 +56,43 @@
 
 // Method for seeding database simultaneously with data creation
 
-const fs = require('fs');
-const mysql = require('mysql');
-const csv = require('fast-csv');
 
-let stream = fs.createReadStream("./data.csv");
-let myData = [];
-let csvStream = csv
-	.parse()
-	.on("data", function (data) {
-		console.log(data)
-		myData.push(data);
-	})
-	.on("end", function () {
-		myData.shift();
 
-		// create a new connection to the database
-		const connection = mysql.createConnection({
-			host: 'localhost',
-			user: 'root',
-			password: 'root',
-			database: 'airbnb'
-		});
+// const fs = require('fs');
+// const mysql = require('mysql');
+// const csv = require('fast-csv');
 
-		// open the connection
-		connection.connect((error) => {
-			if (error) {
-				console.error(error);
-			} else {
-				let query = 'INSERT INTO airbnb.reviews (id,name,avatar,numDaysAgo,content) VALUES ?';
-				con.query(query, [myData], (error, response) => {
-					console.log(error || response);
-				});
-			}
-		});
-	});
+// let stream = fs.createReadStream("./data.csv");
+// let myData = [];
+// let csvStream = csv
+// 	.parse()
+// 	.on("data", function (data) {
+// 		console.log(data)
+// 		myData.push(data);
+// 	})
+// 	.on("end", function () {
+// 		myData.shift();
 
-stream.pipe(csvStream);
+// 		// create a new connection to the database
+// 		const connection = mysql.createConnection({
+// 			host: 'localhost',
+// 			user: 'root',
+// 			password: 'root',
+// 			database: 'airbnb'
+// 		});
+
+// 		// open the connection
+// 		connection.connect((error) => {
+// 			if (error) {
+// 				console.error(error);
+// 			} else {
+// 				let query = 'INSERT INTO airbnb.reviews (id,name,avatar,numDaysAgo,content) VALUES ?';
+// 				con.query(query, [myData], (error, response) => {
+// 					console.log(error || response);
+// 				});
+// 			}
+// 		});
+// 	});
+
+// stream.pipe(csvStream);
 
