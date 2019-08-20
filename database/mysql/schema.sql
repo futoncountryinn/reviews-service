@@ -2,12 +2,13 @@
 
 -- CREATE DATABASE airbnb;
 
-USE airbnb_test;
+USE airbnb;
 
 CREATE TABLE reviews (
   id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  entry_id INT NOT NULL,
   name VARCHAR(25) NOT NULL,
-  avatar VARCHAR(25) NOT NULL,
+  avatar VARCHAR(75) NOT NULL,
   date  VARCHAR(30) NOT NULL,
   content VARCHAR(1500)
 )
