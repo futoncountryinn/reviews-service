@@ -16,10 +16,15 @@ connection.connect((error) => {
 		if (error) {
 			console.error(error);
 		} else {
-			let query = 'INSERT INTO airbnb.reviews (name, entry_id, avatar,date,content) VALUES (?, ?, ?, ?, ?)';
-			connection.query(query, [review.name, review.entry_id, review.avatar, review.date, review.content], (error, response) => {
-				console.log(error || response);
-			});
+			// let query = 'INSERT INTO airbnb.reviews (name, entry_id, avatar,date,content) VALUES (?, ?, ?, ?, ?)';
+			// connection.query(query, [review.name, review.entry_id, review.avatar, review.date, review.content], (error, response) => {
+			// 	console.log(error || response);
+			// });
+			LOAD DATA INFILE 'path/to/file.csv'
+			INTO TABLE table_name
+			FIELDS TERMINATED BY ','
+			ENCLOSED BY '"'
+			LINES TERMINATED BY '\n'
 		}
 	})
 });

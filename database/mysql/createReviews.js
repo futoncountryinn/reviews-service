@@ -3,10 +3,10 @@ const faker = require('faker');
 
 
 const images = JSON.parse(fs.readFileSync('database/mysql/images.json') + '');
-console.log('images:', images[faker.random.number({ min: 0, max: 999 })]);
-const createReview = (cb) => {
+const createReview = (cb, id) => {
 	const review = {};
 	review.name = faker.name.firstName();
+	review.id = id;
 	review.avatar = `https://sdc-reviews-avatars.s3.us-east-2.amazonaws.com/${images[faker.random.number({ min: 0, max: 404 })]}`;
 	review.date = faker.date.past(10);
 	review.entry_id = faker.random.number({ min: 1, max: 1000000 });
@@ -16,17 +16,14 @@ const createReview = (cb) => {
 
 const saveReviews = (start, end) => {
 	for (var i = start; i < end; i++) {
-		createReview((review) => {
-			if (fs.existsSync('data.json')) {
-				fs.appendFileSync('data.json', ',' + JSON.stringify(review));
+		createReview((review, i) => {
+			if (fs.existsSync('data.csv')) {
+				fs.appendFileSync('data.csv', `${review.name}, ${review.entry_id}, ${review.avatar}, ${review.date}, ${review.content}` + '\n');
 			} else {
-				fs.writeFileSync('data.json', '[' + JSON.stringify(review));
+				fs.writeFileSync('data.csv', 'name,entry_id,avatar,date,content\n' + `${review.name},${review.entry_id},${review.avatar},${review.date},${review.content}`);
 			};
-			if (i === end - 1) {
-				fs.appendFileSync('data.json', ']');
-			}
 		});
 	}
 };
 
-saveReviews(0, 1000000);
+saveReviews(0, 50000000);
