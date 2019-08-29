@@ -8,7 +8,7 @@
     "start": "nodemon ./server/server.js",
     "build": "webpack -d --watch",
     "build-json": "node database/mysql/createReviews.js",
-    "seed": "node --max-old-space-size=4096 database/mysql/seed.js"
+    "seed-mysql": "mysql -u root -p < database/mysql/seed.sql"
   },
   "author": "me",
   "license": "ISC",
