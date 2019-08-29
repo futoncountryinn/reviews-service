@@ -9,7 +9,7 @@ CREATE TABLE reviews (
   entry_id INT NOT NULL,
   name VARCHAR(25) NOT NULL,
   avatar VARCHAR(75) NOT NULL,
-  date DATETIME NOT NULL,
+  date DATE NOT NULL,
   content VARCHAR(1500)
 )
 
