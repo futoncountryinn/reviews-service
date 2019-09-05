@@ -1,3 +1,7 @@
 node_modules
 database/config.js
 public/bundle.js
+data.json
+images/
+database/mysql/seed.js
+data.csv

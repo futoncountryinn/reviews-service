@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../../database/helpers');
+const db = require('../../database/mysql/helpers');
 
 
 const defaultCorsHeaders = {

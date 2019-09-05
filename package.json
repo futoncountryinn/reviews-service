@@ -7,7 +7,8 @@
     "test": "jest",
     "start": "nodemon ./server/server.js",
     "build": "webpack -d --watch",
-    "seed": "mysql -u root -p < database/seed.sql "
+    "build-json": "node database/mysql/createReviews.js",
+    "seed-mysql": "mysql -u root -p < database/mysql/seed.sql"
   },
   "author": "me",
   "license": "ISC",
@@ -18,6 +19,7 @@
     "faker": "^4.1.0",
     "fast-csv": "^2.5.0",
     "jquery": "^3.4.1",
+    "moment": "^2.24.0",
     "mysql": "^2.17.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
