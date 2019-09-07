@@ -5,3 +5,4 @@ data.json
 images/
 database/mysql/seed.js
 data.csv
+newrelic.js

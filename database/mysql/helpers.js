@@ -15,9 +15,9 @@ connection.connect((err) => {
   }
 })
 
-// GET ALL REVIEWS
-db.getReviews = (callback) => {
-  connection.query('SELECT * FROM reviews', (err, response) => {
+// GET REVIEWS
+db.getReviews = (id, callback) => {
+  connection.query(`SELECT * FROM reviews where entry_id = ${id}`, (err, response) => {
     if (err) callback(err);
     callback(err, response);
   })

@@ -41,4 +41,4 @@ const saveReviews = (start, end, idRow = false) => {
 }
 
 
-saveReviews(1, 100, true);
+saveReviews(1, 50000000, true);

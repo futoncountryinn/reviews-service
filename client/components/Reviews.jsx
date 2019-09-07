@@ -15,8 +15,14 @@ class Reviews extends React.Component {
   }
 
   getReviews(cb) {
+    var url = document.location.pathname.slice(1);
+    url = 'reviews/' + url;
+    if (url === '') {
+      url = 'reviews/1';
+    }
+    console.log('url:', url);
     $.ajax({
-      url: 'http://localhost:3003/reviews',
+      url: 'http://localhost:3003/' + url,
       type: 'GET',
       dataType: 'json',
       success: data => {
@@ -30,6 +36,7 @@ class Reviews extends React.Component {
 
   componentDidMount() {
     this.getReviews(reviews => {
+      console.log('reviews:', reviews);
       this.setState({
         allReviews: reviews.sort(function(a, b) {
           if (a.numDaysAgo > b.numDaysAgo) {

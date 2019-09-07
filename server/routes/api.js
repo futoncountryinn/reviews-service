@@ -12,15 +12,18 @@ const defaultCorsHeaders = {
 };
 
 
-// GET ALL REVIEWS
-router.get('/reviews', (req, res, next) => {
-  res.set(defaultCorsHeaders);
-  console.log('router.get called');
-  db.getReviews((err, response) => {
-    if (err) throw new Error(err);
-    res.send(response);
-  });
-});
+// GET REVIEWS
+// router.get('/reviews', (req, res, next) => {
+//   res.set(defaultCorsHeaders);
+//   console.log('router.get called');
+//   db.getReviews((err, response) => {
+//     if (err) throw new Error(err);
+//     res.send(response);
+//   });
+// });
+
+
+
 
 // CREATE A REVIEW
 router.post('/reviews/add', (req, res, next) => {
@@ -50,6 +53,17 @@ router.delete('/reviews/delete', (req, res) => {
     res.send(response);
   })
 })
+router.get('/reviews/:id', (req, res) => {
+  const id = req.params.id;
+  res.set(defaultCorsHeaders);
+  console.log('router.get called');
+  db.getReviews(id, (err, response) => {
+    if (err) throw new Error(err);
+    res.json(response);
+    res.end();
+  });
+});
+
 
 module.exports = router;
 
