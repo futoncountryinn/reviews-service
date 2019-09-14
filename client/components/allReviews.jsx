@@ -96,7 +96,7 @@ class AllReviewsLightBox extends React.Component {
                 id={review.id}
                 name={review.name}
                 avatar={review.avatar}
-                reviewAge={review.numDaysAgo}
+                reviewAge={review.date}
                 content={review.content}
                 allReviews={this.state.allReviews}
                 seeAllReviewsMode={true}

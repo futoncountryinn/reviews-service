@@ -39,7 +39,7 @@ class Reviews extends React.Component {
       console.log('reviews:', reviews);
       this.setState({
         allReviews: reviews.sort(function(a, b) {
-          if (a.numDaysAgo > b.numDaysAgo) {
+          if (a.date > b.date) {
             return 1;
           } else {
             return -1;
@@ -62,7 +62,7 @@ class Reviews extends React.Component {
               id={review.id}
               name={review.name}
               avatar={review.avatar}
-              reviewAge={review.numDaysAgo}
+              reviewAge={review.date}
               content={review.content}
               allReviews={this.state.allReviews}
               seeAllReviewsMode={false}

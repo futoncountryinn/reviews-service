@@ -40,27 +40,30 @@ class Review extends React.Component {
     }
   }
 
-  // handles the 'read more' button for all longer reviews
+  // handles the 'read more' button for all longer reviewsx
   reviewExpander() {
     this.setState({
       isToggled: !this.state.isToggled,
     });
   }
 
-  consolidateDaysPast(value) {
-    if (value > 29 && value < 60) {
-      return Math.floor(value / 30) + ' month ago';
+  consolidateDaysPast(date) {
+    const now = new Date();
+    const daysAgo = (now - new Date(date)) / 1000 / 60 / 60 / 24;
+
+    if (daysAgo > 29 && daysAgo < 60) {
+      return Math.floor(daysAgo / 30) + ' month ago';
     }
-    if (value > 59 && value < 365) {
-      return Math.floor(value / 30) + ' months ago';
+    if (daysAgo > 59 && daysAgo < 365) {
+      return Math.floor(daysAgo / 30) + ' months ago';
     }
-    if (value > 365) {
-      return Math.floor(value / 365) + ' year ago';
+    if (daysAgo > 365 && daysAgo < 730) {
+      return '1 year ago';
     }
-    if (value > 730) {
-      return Math.floor(value / 365) + ' years ago';
+    if (daysAgo > 730) {
+      return Math.floor(daysAgo / 365) + ' years ago';
     }
-    return value + ' days ago';
+    return Math.floor(daysAgo) + ' days ago';
   }
 
   componentWillMount() {

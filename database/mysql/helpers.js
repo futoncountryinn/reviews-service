@@ -25,12 +25,10 @@ db.getReviews = (id, callback) => {
 
 // CREATE A REVIEW
 db.createReview = (data, callback) => {
-  const avatar = `https://robohash.org/${faker.lorem.word()}`;
-  const daysAgo = faker.random.number();
 
-  connection.query('INSERT INTO airbnb.reviews (name, avatar, numDaysAgo, content) VALUES (?,?,?,?)', [data.name, avatar, daysAgo, data.content], (err, response) => {
+  connection.query(`INSERT INTO airbnb.reviews (name, entry_id, avatar, date, content) VALUES ('${data.name}', '${data.entry_id}', '${data.avatar}', '${data.date.slice(0, data.date.indexOf('T'))}', '${data.content}')`, (err, response) => {
     callback(err, response);
-  })
+  });
 }
 
 // UPDATE A REVIEW
