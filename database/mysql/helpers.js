@@ -3,7 +3,7 @@ const config = require('./config');
 const faker = require('faker');
 
 // CONNECT TO MYSQL WITH CREDENTIALS
-var connection = mysql.createConnection({ ...config });
+var connection = mysql.createConnection({ host: config.host, user: config.user, password: config.password, database: config.database, port: config.port });
 const db = {};
 
 // CHECK CONNECTION

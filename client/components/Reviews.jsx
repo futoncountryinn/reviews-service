@@ -22,7 +22,7 @@ class Reviews extends React.Component {
     }
     console.log('url:', url);
     $.ajax({
-      url: 'http://localhost:3003/' + url,
+      url: 'http://3.130.162.52:3003/' + url,
       type: 'GET',
       dataType: 'json',
       success: data => {
