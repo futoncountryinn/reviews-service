@@ -2,6 +2,7 @@ var path = require('path');
 var SRC_DIR = path.join(__dirname, '/client');
 var DIST_DIR = path.join(__dirname, '/public');
 var BrotliPlugin = require('brotli-webpack-plugin');
+const S3Plugin = require('webpack-s3-plugin');
 // console.log(SRC_DIR);
 // DONT USE BABEL-LOADER 8, ONLY 7 || npm install -D babel-loader@7 babel-core babel-preset-env webpack
 
@@ -15,6 +16,28 @@ module.exports = {
       test: /\.jsx$/,
       threshold: 10240,
       minRation: 0.8
+    }),
+    new S3Plugin({
+      s3Options: {
+        accessKeyId: 'AKIAIJN3IHYRNB2MTYYA',
+        secretAccessKey: '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',
+        region: 'us-east-2'
+      },
+      s3UploadOptions: {
+        Bucket: 'sdc-reviews-avatars',
+        ContentEncoding(fileName) {
+          if (/\.br/.test(fileName)) {
+            return 'br'
+          }
+        },
+      },
+      ContentType(fileName) {
+        if (/\.js/.test(fileName)) {
+          return 'text/javascript'
+        }
+      },
+      basePath: '/bundle',
+      directory: __dirname + '/public'
     })
   ],
   optimization: {

@@ -7,3 +7,4 @@ database/mysql/seed.js
 data.csv
 newrelic.js
 newrelic_agent.log
+1.bundle.js
